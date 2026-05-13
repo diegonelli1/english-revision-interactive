@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food & Drinks — English Activities</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFF8F0;
+    --card: #FFFFFF;
+    --text: #1A1A2E;
+    --muted: #666;
+    --green: #2D9E75;
+    --green-light: #E1F5EE;
+    --blue: #3A7FD5;
+    --blue-light: #E0EEFF;
+    --amber: #D4840A;
+    --amber-light: #FFF0CC;
+    --purple: #6B4FBF;
+    --purple-light: #EDE8FF;
+    --coral: #D44B2A;
+    --coral-light: #FDEEE9;
+    --teal: #0D8A6A;
+    --teal-light: #D6F5EC;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: radial-gradient(circle, #e8ddd0 1.5px, transparent 1.5px);
+    background-size: 32px 32px;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative; z-index: 2;
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF922B 50%, #FFD93D 100%);
+    padding: 1.2rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.12);
+  }
+  header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    color: white;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+    letter-spacing: 1px;
+  }
+  header p { font-size: clamp(0.85rem, 1.5vw, 1.1rem); color: rgba(255,255,255,0.9); font-weight: 600; }
+  .header-badge {
+    background: rgba(255,255,255,0.25);
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 99px;
+    padding: 6px 18px;
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+    color: white;
+  }
+
+  /* ── TABS ── */
+  .tabs-wrap {
+    position: relative; z-index: 2;
+    display: flex; gap: 10px; flex-wrap: wrap;
+    padding: 1.2rem 2rem 0;
+  }
+  .tab {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+    padding: 10px 22px;
+    border-radius: 99px;
+    border: 2.5px solid transparent;
+    background: white;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+  }
+  .tab:hover:not(.active) { transform: translateY(-2px); box-shadow: 0 4px 0 rgba(0,0,0,0.1); }
+  .tab.t1.active { background: var(--green-light); color: var(--teal); border-color: var(--green); }
+  .tab.t2.active { background: var(--purple-light); color: var(--purple); border-color: var(--purple); }
+  .tab.t3.active { background: var(--coral-light); color: var(--coral); border-color: var(--coral); }
+  .tab.t4.active { background: var(--blue-light); color: var(--blue); border-color: var(--blue); }
+  .tab.t5.active { background: var(--amber-light); color: var(--amber); border-color: var(--amber); }
+
+  /* ── MAIN CONTENT ── */
+  .content {
+    position: relative; z-index: 1;
+    padding: 1.5rem 2rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: clamp(1.2rem, 2.5vw, 2rem);
+    border: 2px solid rgba(0,0,0,0.07);
+    box-shadow: 0 4px 0 rgba(0,0,0,0.06);
+  }
+  .card-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .card-sub {
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+  }
+
+  /* ── TAGS ── */
+  .tag {
+    display: inline-block; padding: 4px 14px; border-radius: 99px;
+    font-size: clamp(0.7rem, 1.2vw, 0.85rem); font-weight: 700;
+    margin-right: 6px; margin-bottom: 10px; letter-spacing: 0.3px;
+  }
+  .tg { background: var(--green-light); color: var(--teal); }
+  .tp { background: var(--purple-light); color: var(--purple); }
+  .ta { background: var(--amber-light); color: var(--amber); }
+  .tc { background: var(--coral-light); color: var(--coral); }
+  .tb { background: var(--blue-light); color: var(--blue); }
+
+  /* ── BUTTONS ── */
+  .btn {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+    padding: 10px 26px;
+    border-radius: 99px;
+    border: 2.5px solid var(--text);
+    background: white;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-right: 8px; margin-top: 10px;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.15);
+  }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 0 rgba(0,0,0,0.15); }
+  .btn:active:not(:disabled) { transform: translateY(1px); box-shadow: 0 2px 0 rgba(0,0,0,0.15); }
+  .btn:disabled { opacity: 0.4; cursor: default; }
+  .btn-primary { background: var(--text); color: white; }
+
+  /* ── FLASHCARD ── */
+  .fc-outer {
+    perspective: 1000px;
+    width: min(480px, 90%);
+    height: clamp(180px, 25vw, 260px);
+    margin: 0 auto 1.5rem;
+    cursor: pointer;
+  }
+  .fc-inner {
+    width: 100%; height: 100%;
+    position: relative; transform-style: preserve-3d;
+    transition: transform 0.5s;
+  }
+  .fc-inner.flipped { transform: rotateY(180deg); }
+  .fc-face {
+    position: absolute; inset: 0;
+    border-radius: 20px; border: 2.5px solid rgba(0,0,0,0.1);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 2rem; backface-visibility: hidden;
+    background: white;
+  }
+  .fc-back { transform: rotateY(180deg); background: var(--green-light); border-color: var(--green); }
+  .fc-word { font-family: 'Fredoka One', cursive; font-size: clamp(1.8rem, 4vw, 3rem); color: var(--text); margin-bottom: 6px; }
+  .fc-back .fc-word { color: var(--teal); }
+  .fc-cat { font-size: clamp(0.8rem, 1.4vw, 1rem); color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+  .fc-ex { font-size: clamp(0.85rem, 1.5vw, 1.1rem); color: var(--teal); font-weight: 700; margin-top: 8px; }
+  .fc-hint { font-size: clamp(0.75rem, 1.2vw, 0.9rem); color: #bbb; margin-top: 8px; }
+  .fc-nav { display: flex; align-items: center; gap: 16px; justify-content: center; margin-top: 0.5rem; }
+  .fc-count { font-family: 'Fredoka One', cursive; font-size: clamp(1rem, 1.8vw, 1.3rem); color: var(--muted); }
+
+  /* ── QUIZ ── */
+  .q-text {
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    font-weight: 800;
+    line-height: 1.4;
+    margin-bottom: 1.2rem;
+    color: var(--text);
+  }
+  .mc-opt {
+    display: block; width: 100%; text-align: left;
+    padding: clamp(10px, 1.8vw, 16px) clamp(14px, 2vw, 22px);
+    border-radius: 14px; border: 2.5px solid rgba(0,0,0,0.1);
+    background: white; color: var(--text);
+    font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+    font-family: 'Nunito', sans-serif; font-weight: 700;
+    cursor: pointer; margin-bottom: 10px;
+    transition: all 0.15s;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.06);
+  }
+  .mc-opt:hover:not(:disabled) { transform: translateX(6px); background: #fafafa; }
+  .mc-opt.correct { background: var(--green-light); border-color: var(--green); color: var(--teal); }
+  .mc-opt.wrong { background: var(--coral-light); border-color: var(--coral); color: var(--coral); }
+  .score-row { display: flex; align-items: center; gap: 16px; margin-bottom: 1rem; }
+  .score-num { font-family: 'Fredoka One', cursive; font-size: clamp(1.1rem, 2vw, 1.5rem); color: var(--text); }
+  .prog { flex: 1; height: 10px; background: #eee; border-radius: 99px; overflow: hidden; }
+  .prog-fill { height: 100%; background: linear-gradient(90deg, var(--green), #52D9A8); border-radius: 99px; transition: width 0.4s; }
+
+  /* ── SENTENCE BUILDER ── */
+  .drop-zone {
+    min-height: 64px; border: 2.5px dashed rgba(0,0,0,0.15);
+    border-radius: 16px; padding: 12px 16px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+    align-items: center; margin-bottom: 1rem;
+    background: #fafaf8;
+  }
+  .drop-placeholder { font-size: clamp(0.85rem, 1.5vw, 1rem); color: #bbb; font-style: italic; font-weight: 600; }
+  .word-chip {
+    padding: clamp(7px, 1.2vw, 10px) clamp(14px, 2vw, 20px);
+    border-radius: 99px;
+    font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+    font-family: 'Nunito', sans-serif; font-weight: 700;
+    cursor: pointer; border: 2px solid rgba(0,0,0,0.1);
+    background: white; color: var(--text);
+    transition: all 0.15s; margin: 4px;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+  }
+  .word-chip:hover { transform: translateY(-2px); box-shadow: 0 4px 0 rgba(0,0,0,0.1); }
+  .word-chip.used { opacity: 0.25; cursor: default; pointer-events: none; }
+  .drop-chip {
+    padding: clamp(7px, 1.2vw, 10px) clamp(14px, 2vw, 20px);
+    border-radius: 99px; font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+    font-family: 'Nunito', sans-serif; font-weight: 700;
+    cursor: pointer; border: 2px solid rgba(0,0,0,0.15);
+    transition: all 0.15s;
+  }
+  .drop-chip:hover { opacity: 0.75; }
+  .sb-hint { font-size: clamp(0.85rem, 1.5vw, 1rem); color: var(--muted); font-weight: 700; margin-bottom: 10px; font-style: italic; }
+  .fb { font-family: 'Fredoka One', cursive; font-size: clamp(1rem, 1.8vw, 1.3rem); min-height: 24px; margin: 8px 0; }
+  .fb.ok { color: var(--green); }
+  .fb.no { color: var(--coral); }
+
+  /* ── FILL IN THE BLANK ── */
+  .fitb-sentence {
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    font-weight: 700; line-height: 1.6;
+    margin-bottom: 10px; color: var(--text);
+  }
+  .fitb-hint { font-size: clamp(0.8rem, 1.4vw, 0.95rem); color: var(--muted); font-weight: 600; margin-bottom: 10px; font-style: italic; }
+  input[type=text] {
+    padding: clamp(8px, 1.2vw, 12px) clamp(12px, 1.6vw, 18px);
+    border-radius: 12px; border: 2.5px solid rgba(0,0,0,0.12);
+    font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+    font-family: 'Nunito', sans-serif; font-weight: 700;
+    background: white; color: var(--text);
+    width: clamp(120px, 18vw, 200px);
+    margin: 0 6px;
+    outline: none; transition: border-color 0.2s;
+  }
+  input[type=text]:focus { border-color: var(--blue); }
+
+  /* ── GRAMMAR RULES ── */
+  .rule-card {
+    border-radius: 16px; border: 2px solid rgba(0,0,0,0.07);
+    margin-bottom: 12px; overflow: hidden;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.05);
+  }
+  .rule-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: clamp(12px, 1.8vw, 18px) clamp(16px, 2vw, 22px);
+    cursor: pointer; transition: opacity 0.15s;
+  }
+  .rule-header:hover { opacity: 0.85; }
+  .rule-title { font-family: 'Fredoka One', cursive; font-size: clamp(1rem, 2vw, 1.4rem); }
+  .rule-arrow { font-size: clamp(1rem, 1.8vw, 1.3rem); transition: transform 0.25s; }
+  .rule-arrow.open { transform: rotate(180deg); }
+  .rule-body { display: none; padding: clamp(12px, 1.8vw, 18px) clamp(16px, 2vw, 22px); padding-top: 0; }
+  .rule-body.open { display: block; }
+  .rule-desc { font-size: clamp(0.9rem, 1.6vw, 1.1rem); font-weight: 600; margin-bottom: 12px; line-height: 1.5; }
+  .rule-ex { font-size: clamp(0.85rem, 1.5vw, 1rem); padding: 5px 0; font-weight: 700; }
+
+  /* ── 2-col layout for quiz ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── pop animation ── */
+  @keyframes pop { 0%{transform:scale(1)} 50%{transform:scale(1.03)} 100%{transform:scale(1)} }
+  .pop { animation: pop 0.3s ease; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>🍎 Food & Drinks</h1>
+    <p>English Activities · Ages 9–10</p>
+  </div>
+  <div class="header-badge">Interactive Activities</div>
+</header>
+
+<div class="tabs-wrap">
+  <button class="tab t1 active" onclick="showSec(0)">🃏 Flashcards</button>
+  <button class="tab t2" onclick="showSec(1)">❓ Quiz</button>
+  <button class="tab t3" onclick="showSec(2)">🔨 Sentence Builder</button>
+  <button class="tab t4" onclick="showSec(3)">✏️ Fill in the blank</button>
+  <button class="tab t5" onclick="showSec(4)">📖 Grammar Rules</button>
+</div>
+
+<div class="content">
+
+  <!-- ── FLASHCARDS ── -->
+  <div class="section active" id="s0">
+    <div class="card">
+      <div><span class="tag tg">Vocabulary</span><span class="tag ta">Individual</span></div>
+      <div class="card-title">Food, Drinks & Containers</div>
+      <div class="card-sub">Click the card to see the translation and container example.</div>
+
+      <div class="fc-outer" onclick="flipCard()">
+        <div class="fc-inner" id="fcInner">
+          <div class="fc-face">
+            <div class="fc-word" id="fcFront">—</div>
+            <div class="fc-cat" id="fcCat"></div>
+            <div class="fc-hint">tap to flip 👆</div>
+          </div>
+          <div class="fc-face fc-back">
+            <div class="fc-word" id="fcBack">—</div>
+            <div class="fc-ex" id="fcEx"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc-nav">
+        <button class="btn" onclick="prevCard()">← Prev</button>
+        <span class="fc-count" id="fcCount">1 / 20</span>
+        <button class="btn" onclick="nextCard()">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── QUIZ ── -->
+  <div class="section" id="s1">
+    <div class="card">
+      <div><span class="tag tp">Quiz</span><span class="tag ta">Individual / teams</span></div>
+      <div class="card-title">Food, containers & grammar</div>
+      <div class="score-row">
+        <span class="score-num">Score: <b id="qScore">0</b> / 12</span>
+        <div class="prog"><div class="prog-fill" id="qProg" style="width:0%"></div></div>
+      </div>
+      <div id="qArea"></div>
+      <button class="btn btn-primary" id="qNext" style="display:none" onclick="nextQ()">Next question →</button>
+      <button class="btn" id="qRestart" style="display:none" onclick="restartQ()">Play again</button>
+    </div>
+  </div>
+
+  <!-- ── SENTENCE BUILDER ── -->
+  <div class="section" id="s2">
+    <div class="card">
+      <div><span class="tag tc">Sentence builder</span><span class="tag ta">Pairs / teams</span></div>
+      <div class="card-title">Build the sentence</div>
+      <div class="card-sub">Tap words in order to build the correct sentence. Tap a word in the box to remove it.</div>
+      <div class="sb-hint" id="sbHint"></div>
+      <div class="drop-zone" id="sbZone"><span class="drop-placeholder">tap words below...</span></div>
+      <div class="fb" id="sbFb"></div>
+      <div id="sbPool" style="margin: 8px 0 16px;"></div>
+      <button class="btn btn-primary" onclick="checkSB()">Check ✓</button>
+      <button class="btn" onclick="clearSB()">Clear</button>
+      <button class="btn" onclick="nextSB()">Next sentence →</button>
+      <div style="font-size:clamp(0.75rem,1.2vw,0.9rem);color:var(--muted);margin-top:10px;" id="sbCounter"></div>
+    </div>
+  </div>
+
+  <!-- ── FILL IN THE BLANK ── -->
+  <div class="section" id="s3">
+    <div class="card">
+      <div><span class="tag tb">Fill in the blank</span><span class="tag ta">Individual</span></div>
+      <div class="card-title">Complete the sentence</div>
+      <div class="card-sub">Type the missing word and press Check.</div>
+      <div id="fitbArea"></div>
+      <button class="btn btn-primary" onclick="checkFITB()">Check ✓</button>
+      <button class="btn" onclick="nextFITB()">Next →</button>
+      <div style="font-size:clamp(0.75rem,1.2vw,0.9rem);color:var(--muted);margin-top:10px;" id="fitbCounter"></div>
+    </div>
+  </div>
+
+  <!-- ── GRAMMAR RULES ── -->
+  <div class="section" id="s4">
+    <div class="card">
+      <div><span class="tag ta">Grammar reference</span><span class="tag tg">For the class</span></div>
+      <div class="card-title">Grammar Rules — Quick Reference</div>
+      <div class="card-sub">Tap any rule to see examples.</div>
+      <div id="rulesArea"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showSec(i){
+  document.querySelectorAll('.section').forEach((s,idx)=>s.classList.toggle('active',idx===i));
+  document.querySelectorAll('.tab').forEach((t,idx)=>t.classList.toggle('active',idx===i));
+}
+
+// ── FLASHCARDS DATA ──────────────────────────────────────────────────
+const CARDS=[
+  {en:'apple',es:'🍎 manzana',cat:'fruit',ex:'an apple'},
+  {en:'banana',es:'🍌 banana',cat:'fruit',ex:'a banana'},
+  {en:'orange',es:'🍊 naranja',cat:'fruit',ex:'an orange'},
+  {en:'bread',es:'🍞 pan',cat:'food',ex:'a loaf of bread'},
+  {en:'rice',es:'🍚 arroz',cat:'food',ex:'a bag of rice'},
+  {en:'milk',es:'🥛 leche',cat:'drink',ex:'a carton of milk'},
+  {en:'water',es:'💧 agua',cat:'drink',ex:'a bottle of water'},
+  {en:'juice',es:'🧃 jugo',cat:'drink',ex:'a glass / carton of juice'},
+  {en:'eggs',es:'🥚 huevos',cat:'food',ex:'a box of eggs'},
+  {en:'cheese',es:'🧀 queso',cat:'food',ex:'a packet of cheese'},
+  {en:'butter',es:'🧈 mantequilla',cat:'food',ex:'a jar of butter'},
+  {en:'soup',es:'🍲 sopa',cat:'food',ex:'a tin of soup'},
+  {en:'biscuits',es:'🍪 galletitas',cat:'food',ex:'a packet of biscuits'},
+  {en:'cereal',es:'🥣 cereal',cat:'food',ex:'a box of cereal'},
+  {en:'yoghurt',es:'🍶 yogur',cat:'food',ex:'a pot of yoghurt'},
+  {en:'bottle',es:'🍾 botella',cat:'container',ex:'a bottle of water / juice'},
+  {en:'carton',es:'📦 cartón / caja',cat:'container',ex:'a carton of milk'},
+  {en:'tin / can',es:'🥫 lata',cat:'container',ex:'a tin of tomatoes / soup'},
+  {en:'packet',es:'📬 paquete',cat:'container',ex:'a packet of biscuits / rice'},
+  {en:'jar',es:'🫙 frasco',cat:'container',ex:'a jar of honey / butter'},
+];
+
+let ci=0, cf=false;
+function renderCard(){
+  cf=false;
+  document.getElementById('fcInner').classList.remove('flipped');
+  const c=CARDS[ci];
+  document.getElementById('fcFront').textContent=c.en;
+  document.getElementById('fcCat').textContent=c.cat.toUpperCase();
+  document.getElementById('fcBack').textContent=c.es;
+  document.getElementById('fcEx').textContent='e.g. '+c.ex;
+  document.getElementById('fcCount').textContent=(ci+1)+' / '+CARDS.length;
+}
+function flipCard(){cf=!cf;document.getElementById('fcInner').classList.toggle('flipped',cf);}
+function prevCard(){ci=(ci-1+CARDS.length)%CARDS.length;renderCard();}
+function nextCard(){ci=(ci+1)%CARDS.length;renderCard();}
+renderCard();
+
+// ── QUIZ DATA ────────────────────────────────────────────────────────
+const QS=[
+  {q:'Which container do you use for milk?',opts:['a jar','a carton','a tin','a packet'],ans:1},
+  {q:'There ___ some apples on the table.',opts:['is','are','am','be'],ans:1},
+  {q:'"There ___ any milk in the fridge." (negative)',opts:["isn't","aren't","is","are"],ans:0},
+  {q:'I have ___ biscuits. (not many, but some)',opts:['a little','a lot of','a few','any'],ans:2},
+  {q:'There is ___ water in the bottle. (not much)',opts:['a few','a little','a lot','some'],ans:1},
+  {q:'Which sentence is correct?',opts:['There is some breads.','There are some bread.','There is some bread.','There are some breads.'],ans:2},
+  {q:'A tin is usually used for...',opts:['juice','soup or vegetables','cereal','butter'],ans:1},
+  {q:'"___ there any eggs?" — "Yes, there ___."',opts:['Is / is','Are / are','Is / are','Are / is'],ans:1},
+  {q:'Maria is from Spain. She is ___.',opts:['Italian','French','Spanish','British'],ans:2},
+  {q:'I have ___ orange juice — the carton is almost full!',opts:['a few','a little','a lot of','any'],ans:2},
+  {q:'Which container do you use for honey?',opts:['a bottle','a packet','a jar','a carton'],ans:2},
+  {q:'There ___ a lot of rice in the bag.',opts:['are','is','be','am'],ans:1},
+];
+let qi=0,qs=0,qa=false;
+function renderQ(){
+  const q=QS[qi];
+  if(!q){endQ();return;}
+  qa=false;
+  document.getElementById('qNext').style.display='none';
+  const optHTML = q.opts.length===4
+    ? '<div class="two-col">'+q.opts.map((o,i)=>'<button class="mc-opt" onclick="answerQ('+i+')">'+String.fromCharCode(65+i)+') '+o+'</button>').join('')+'</div>'
+    : q.opts.map((o,i)=>'<button class="mc-opt" onclick="answerQ('+i+')">'+String.fromCharCode(65+i)+') '+o+'</button>').join('');
+  document.getElementById('qArea').innerHTML='<div class="q-text">'+(qi+1)+'. '+q.q+'</div>'+optHTML;
+}
+function answerQ(i){
+  if(qa)return; qa=true;
+  const q=QS[qi];
+  document.querySelectorAll('.mc-opt').forEach(b=>b.disabled=true);
+  document.querySelectorAll('.mc-opt')[q.ans].classList.add('correct');
+  if(i===q.ans)qs++; else document.querySelectorAll('.mc-opt')[i].classList.add('wrong');
+  document.getElementById('qScore').textContent=qs;
+  document.getElementById('qProg').style.width=((qi+1)/QS.length*100)+'%';
+  qi++;
+  document.getElementById('qNext').style.display=qi<QS.length?'inline-block':'none';
+  if(qi>=QS.length)setTimeout(endQ,800);
+}
+function nextQ(){renderQ();}
+function endQ(){
+  document.getElementById('qArea').innerHTML='<div class="q-text">🎉 Quiz complete! Final score: <b>'+qs+' / '+QS.length+'</b></div>';
+  document.getElementById('qNext').style.display='none';
+  document.getElementById('qRestart').style.display='inline-block';
+}
+function restartQ(){qi=0;qs=0;document.getElementById('qScore').textContent=0;document.getElementById('qProg').style.width='0%';document.getElementById('qRestart').style.display='none';renderQ();}
+renderQ();
+
+// ── SENTENCE BUILDER DATA ────────────────────────────────────────────
+const SBS=[
+  {hint:'🇦🇷 "Hay un poco de leche en la nevera."',words:['There','is','a','little','milk','in','the','fridge','.']},
+  {hint:'🇦🇷 "¿Hay algunos huevos?"',words:['Are','there','any','eggs','?']},
+  {hint:'🇦🇷 "Hay muchas manzanas en la bolsa."',words:['There','are','a','lot','of','apples','in','the','bag','.']},
+  {hint:'🇦🇷 "No hay ningún jugo en la nevera."',words:["There","isn't","any","juice","in","the","fridge","."]},
+  {hint:'🇦🇷 "Tengo pocas galletitas."',words:['I','have','a','few','biscuits','.']},
+  {hint:'🇦🇷 "¿Hay algo de pan?"',words:['Is','there','any','bread','?']},
+  {hint:'🇦🇷 "Ella es italiana y le gusta el queso."',words:['She','is','Italian','and','she','likes','cheese','.']},
+  {hint:'🇦🇷 "Hay una lata de sopa en la alacena."',words:['There','is','a','tin','of','soup','in','the','cupboard','.']},
+];
+let sbi=0, built=[];
+const CHIP_COLORS=['#E0EEFF','#E1F5EE','#FAEEDA','#EDE8FF','#FDEEE9','#D6F5EC'];
+function shuffle(a){return[...a].sort(()=>Math.random()-0.5);}
+function renderSB(){
+  built=[];
+  const s=SBS[sbi];
+  document.getElementById('sbHint').textContent=s.hint;
+  document.getElementById('sbFb').textContent='';
+  document.getElementById('sbFb').className='fb';
+  document.getElementById('sbCounter').textContent='Sentence '+(sbi+1)+' of '+SBS.length;
+  const sh=shuffle(s.words);
+  document.getElementById('sbPool').innerHTML=sh.map((w,i)=>'<span class="word-chip" id="sc'+i+'" onclick="addSBW(this,\''+w.replace(/'/g,"\\'") +'\','+i+')">'+w+'</span>').join('');
+  renderSBZone();
+}
+function renderSBZone(){
+  const z=document.getElementById('sbZone');
+  if(!built.length){z.innerHTML='<span class="drop-placeholder">tap words below...</span>';return;}
+  z.innerHTML=built.map((item,i)=>'<span class="drop-chip" style="background:'+CHIP_COLORS[i%CHIP_COLORS.length]+'" onclick="removeSBW('+i+')">'+item.w+'</span>').join('');
+}
+function addSBW(el,w,i){if(el.classList.contains('used'))return;el.classList.add('used');built.push({w,id:'sc'+i});renderSBZone();}
+function removeSBW(i){const item=built.splice(i,1)[0];const el=document.getElementById(item.id);if(el)el.classList.remove('used');renderSBZone();}
+function clearSB(){built.forEach(item=>{const e=document.getElementById(item.id);if(e)e.classList.remove('used');});built=[];renderSBZone();document.getElementById('sbFb').textContent='';}
+function checkSB(){
+  const ans=built.map(i=>i.w).join(' ');
+  const cor=SBS[sbi].words.join(' ');
+  const fb=document.getElementById('sbFb');
+  if(ans===cor){fb.textContent='✅ Correct! Well done!';fb.className='fb ok';}
+  else{fb.textContent='❌ Not quite. Correct: "'+cor.replace(/\s([.,?!])/g,'$1')+'"';fb.className='fb no';}
+}
+function nextSB(){sbi=(sbi+1)%SBS.length;renderSB();}
+renderSB();
+
+// ── FILL IN THE BLANK DATA ───────────────────────────────────────────
+const FITBS=[
+  {pre:'There ',blank:'is',post:' some bread on the table.',hint:'there is / there are'},
+  {pre:'We have a ',blank:'little',post:" butter left — the jar is almost empty.",hint:'a little = not much (uncountable)'},
+  {pre:'Are there ',blank:'any',post:' eggs in the fridge?',hint:'questions → any'},
+  {pre:'I have a ',blank:'few',post:' biscuits. Do you want one?',hint:'a few = some, not many (countable)'},
+  {pre:"There ",blank:"isn't",post:' any milk in the carton.',hint:'negative → any'},
+  {pre:'She is from Italy. She is ',blank:'Italian',post:'.',hint:'nationality adjective'},
+  {pre:'There are a lot ',blank:'of',post:' apples in the bag.',hint:'a lot of...'},
+  {pre:'Is there ',blank:'any',post:' juice in the bottle?',hint:'questions → any'},
+  {pre:'We have a ',blank:'tin',post:' of soup in the cupboard.',hint:'container for soup'},
+  {pre:'There is a ',blank:'carton',post:' of milk in the fridge.',hint:'container for milk'},
+];
+let fi=0;
+function renderFITB(){
+  const f=FITBS[fi];
+  document.getElementById('fitbCounter').textContent='Sentence '+(fi+1)+' of '+FITBS.length;
+  document.getElementById('fitbArea').innerHTML=
+    '<div class="fitb-sentence">'+f.pre+'<input type="text" id="fitbInput" placeholder="...">'+f.post+'</div>'+
+    '<div class="fitb-hint">💡 Hint: '+f.hint+'</div>'+
+    '<div class="fb" id="fitbFb"></div>';
+  setTimeout(()=>{const el=document.getElementById('fitbInput');if(el)el.focus();},80);
+  document.getElementById('fitbInput').addEventListener('keydown',e=>{if(e.key==='Enter')checkFITB();});
+}
+function checkFITB(){
+  const inp=document.getElementById('fitbInput');
+  const fb=document.getElementById('fitbFb');
+  if(!inp||!fb)return;
+  const val=inp.value.trim().toLowerCase();
+  const cor=FITBS[fi].blank.toLowerCase();
+  if(val===cor){fb.textContent='✅ Correct!';fb.className='fb ok';}
+  else{fb.textContent='❌ Not quite. Answer: "'+FITBS[fi].blank+'"';fb.className='fb no';}
+}
+function nextFITB(){fi=(fi+1)%FITBS.length;renderFITB();}
+renderFITB();
+
+// ── GRAMMAR RULES DATA ───────────────────────────────────────────────
+const RULES=[
+  {title:'There is / There are',bg:'#E0EEFF',tc:'#185FA5',
+   desc:'Use <b>there is</b> with singular or uncountable nouns.<br>Use <b>there are</b> with plural nouns.',
+   exs:['There <b>is</b> a bottle of water on the table.','There <b>are</b> some eggs in the fridge.','There <b>is</b> some bread — (bread is uncountable!)']},
+  {title:'Some / Any',bg:'#E1F5EE',tc:'#0F6E56',
+   desc:'Use <b>some</b> in positive sentences.<br>Use <b>any</b> in questions and negatives.',
+   exs:['There are <b>some</b> apples. ✅','Is there <b>any</b> milk? ✅',"There isn't <b>any</b> butter. ✅"]},
+  {title:'A little / A few',bg:'#FAEEDA',tc:'#854F0B',
+   desc:'Use <b>a little</b> with uncountable nouns (water, rice, milk...).<br>Use <b>a few</b> with countable nouns (eggs, biscuits, apples...).',
+   exs:['There is <b>a little</b> water left. 💧','I have <b>a few</b> biscuits. 🍪','She needs <b>a little</b> sugar. 🍬']},
+  {title:'A lot of',bg:'#EDE8FF',tc:'#534AB7',
+   desc:'Use <b>a lot of</b> with BOTH countable and uncountable nouns in positive sentences.',
+   exs:['There are <b>a lot of</b> oranges. 🍊','There is <b>a lot of</b> rice. 🍚','We have <b>a lot of</b> food! 🎉']},
+  {title:'Containers',bg:'#FDEEE9',tc:'#993C1D',
+   desc:'Use containers to talk about quantity with uncountable nouns.',
+   exs:['a <b>bottle</b> of water / juice 🍾','a <b>carton</b> of milk / juice 📦','a <b>tin</b> of soup / tomatoes 🥫','a <b>packet</b> of biscuits / rice 📬','a <b>jar</b> of honey / butter 🫙','a <b>box</b> of cereal / eggs 📭']},
+  {title:'Nationalities',bg:'#D6F5EC',tc:'#0D8A6A',
+   desc:'Nationality adjectives describe where someone is from.<br>They always start with a <b>capital letter</b>!',
+   exs:['Spain → <b>Spanish</b> 🇪🇸','Italy → <b>Italian</b> 🇮🇹','France → <b>French</b> 🇫🇷','Argentina → <b>Argentinian</b> 🇦🇷','England → <b>English</b> 🏴󠁧󠁢󠁥󠁮󠁧󠁿']},
+];
+
+function renderRules(){
+  document.getElementById('rulesArea').innerHTML=RULES.map((r,i)=>
+    '<div class="rule-card" style="border-color:'+r.tc+'40;">'+
+    '<div class="rule-header" style="background:'+r.bg+'" onclick="toggleRule('+i+')">'+
+    '<span class="rule-title" style="color:'+r.tc+'">'+r.title+'</span>'+
+    '<span class="rule-arrow" id="rarr'+i+'" style="color:'+r.tc+'">▼</span></div>'+
+    '<div class="rule-body" id="rbody'+i+'" style="background:'+r.bg+'20;">'+
+    '<p class="rule-desc" style="color:'+r.tc+'">'+r.desc+'</p>'+
+    r.exs.map(e=>'<div class="rule-ex" style="color:'+r.tc+'">→ '+e+'</div>').join('')+
+    '</div></div>'
+  ).join('');
+}
+function toggleRule(i){
+  const b=document.getElementById('rbody'+i);
+  const a=document.getElementById('rarr'+i);
+  const open=b.classList.contains('open');
+  b.classList.toggle('open',!open);
+  a.classList.toggle('open',!open);
+}
+renderRules();
+</script>
+</body>
+</html>
